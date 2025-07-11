@@ -12,10 +12,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 	return (
 		<html lang="en">
 			<body className="bg-gray-50 text-gray-900">
+				{/* Sidebar goes first so it's not hidden by Navbar */}
+				<Sidebar />
 				<Navbar />
-				<div className="flex min-h-screen">
-					<Sidebar />
-					<main className="flex-1 p-6">{children}</main>
+
+				<div className="flex min-h-screen flex-col md:ml-64">
+					<main className="flex-1 overflow-y-auto p-4 sm:p-6">{children}</main>
 				</div>
 			</body>
 		</html>

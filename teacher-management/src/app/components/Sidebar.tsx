@@ -1,9 +1,8 @@
-// src/app/components/Sidebar.tsx
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { Menu, X, Home, Users, Settings } from "lucide-react";
 
 const navItems = [
@@ -14,29 +13,38 @@ const navItems = [
 
 export default function Sidebar() {
 	const [isOpen, setIsOpen] = useState(false);
+	const [isMounted, setIsMounted] = useState(false);
 	const pathname = usePathname();
+	const router = useRouter();
+	// Delay rendering until mounted
+	useEffect(() => {
+		setIsMounted(true);
+	}, []);
+
+	if (!isMounted) return null;
 
 	return (
 		<>
-			{/* Mobile Overlay */}
+			{/* Overlay */}
 			{isOpen && <div className="fixed inset-0 bg-black/50 z-30 md:hidden" onClick={() => setIsOpen(false)} />}
 
 			{/* Desktop Sidebar */}
-			<aside className="hidden md:block w-64 bg-white border-r border-gray-200 ">
+			<aside className="hidden md:flex flex-col w-64 min-h-[95vh] bg-white border-r border-gray-200 fixed top-[60px] left-0 z-50">
 				<nav className="flex flex-col px-4 py-6 space-y-1">
 					{navItems.map((item) => {
 						const isActive = item.href === "/" ? pathname === item.href : pathname.startsWith(item.href);
 
 						return (
-							<Link
+							<button
 								key={item.name}
-								href={item.href}
-								className={`flex items-center px-4 py-2 rounded-lg text-sm font-medium transition
-        ${isActive ? "bg-blue-600 text-white shadow" : "text-gray-700 hover:bg-blue-100"}`}
+								onClick={() => router.push(item.href)}
+								className={`w-full text-left flex items-center px-4 py-2 rounded-lg text-sm font-medium transition ${
+									isActive ? "bg-blue-600 text-white shadow" : "text-gray-700 hover:bg-blue-100"
+								}`}
 							>
 								{item.icon}
 								{item.name}
-							</Link>
+							</button>
 						);
 					})}
 				</nav>
@@ -44,7 +52,7 @@ export default function Sidebar() {
 
 			{/* Mobile Sidebar */}
 			<aside
-				className={`fixed z-40 top-0 left-0 h-full w-64 bg-white shadow-md transform transition-transform duration-300 ease-in-out md:hidden ${
+				className={`fixed top-0 left-0 h-full w-64 bg-white z-40 shadow-md transform transition-transform duration-300 ease-in-out md:hidden ${
 					isOpen ? "translate-x-0" : "-translate-x-full"
 				}`}
 			>
@@ -55,26 +63,32 @@ export default function Sidebar() {
 					</button>
 				</div>
 				<nav className="flex flex-col px-4 py-4 space-y-1">
-					{navItems.map((item) => (
-						<Link
-							key={item.name}
-							href={item.href}
-							className={`flex items-center px-4 py-2 rounded-lg text-sm font-medium transition ${
-								pathname === item.href ? "bg-blue-600 text-white shadow" : "text-gray-700 hover:bg-blue-100"
-							}`}
-							onClick={() => setIsOpen(false)}
-						>
-							{item.icon}
-							{item.name}
-						</Link>
-					))}
+					{navItems.map((item) => {
+						const isActive = item.href === "/" ? pathname === item.href : pathname.startsWith(item.href);
+
+						return (
+							<Link
+								key={item.name}
+								href={item.href}
+								className={`flex items-center px-4 py-2 rounded-lg text-sm font-medium transition ${
+									isActive ? "bg-blue-600 text-white shadow" : "text-gray-700 hover:bg-blue-100"
+								}`}
+								onClick={() => setIsOpen(false)}
+							>
+								{item.icon}
+								{item.name}
+							</Link>
+						);
+					})}
 				</nav>
 			</aside>
 
-			{/* Toggle Button (Mobile only) */}
+			{/* Mobile Hamburger */}
 			<button
 				onClick={() => setIsOpen(true)}
-				className="md:hidden fixed top-4 left-4 z-50 bg-blue-600 text-white p-2 rounded-md shadow-md"
+				className={`md:hidden fixed top-4 left-4 z-50 bg-gray-400 text-white p-2 rounded-md shadow-md ${
+					isOpen ? "hidden" : "block"
+				}`}
 			>
 				<Menu className="w-5 h-5" />
 			</button>

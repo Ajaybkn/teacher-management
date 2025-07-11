@@ -61,15 +61,20 @@ export default function TeachersListPage() {
 				</div>
 
 				<div className="flex flex-col md:flex-row items-center gap-4">
-					<div>
+					<div className="w-full md:w-auto">
 						<label className="mr-2 font-medium">Sort by:</label>
-						<select value={sort} onChange={(e) => setSort(e.target.value)} className="p-2 border rounded shadow-sm">
+						<select
+							value={sort}
+							onChange={(e) => setSort(e.target.value)}
+							className="p-2 border rounded shadow-sm w-full md:w-auto"
+						>
 							<option value="name">Name</option>
 							<option value="email">Email</option>
 						</select>
 					</div>
-					<div>
+					<div className="w-full md:w-auto">
 						<label className="mr-2 font-medium">Filter:</label>
+						<br />
 						<select value={filter} onChange={(e) => setFilter(e.target.value)} className="p-2 border rounded shadow-sm">
 							<option value="all">All</option>
 							<option value="private">Private Qualified</option>
@@ -104,7 +109,7 @@ export default function TeachersListPage() {
 				))}
 			</div>
 
-			<div className="fixed bottom-0 left-0 right-0 bg-white py-4 flex justify-center items-center space-x-2 border-t z-10">
+			<div className="fixed bottom-0 left-0 right-0 bg-white py-4 flex justify-center sm:justify-evenly items-center space-x-2 z-10">
 				{Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
 					<button
 						key={page}
