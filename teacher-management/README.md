@@ -1,36 +1,44 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🎓 Teacher Management Dashboard
 
-## Getting Started
+A modern and responsive teacher management platform built using [Next.js](https://nextjs.org), [Tailwind CSS](https://tailwindcss.com), [Recharts](https://recharts.org), and [DaisyUI](https://daisyui.com). This dashboard allows you to manage teachers, view reports, switch between dark and light themes, manage subscriptions, and more.
 
-First, run the development server:
+---
 
-```bash
+## 🚀 Features
+
+- View and filter teacher qualifications
+- Individual teacher profile with schedule
+- Beautiful charts and reports with Recharts
+- Contact support form with validation
+- Subscription plans with modal payments
+- Responsive layout and sleek UI
+
+
+---
+
+## 🛠️ Technologies
+
+- [Next.js 15 (App Router)](https://nextjs.org)
+- [Tailwind CSS v4](https://tailwindcss.com)
+- [Recharts](https://recharts.org)
+- [Lucide React Icons](https://lucide.dev/icons)
+- [Framer Motion](https://www.framer.com/motion/)
+
+---
+
+## 🧩 Getting Started (Local Setup)
+
+### 📦 Clone the Repo
+
+
+git clone https://github.com/yourusername/teacher-management.git
+cd teacher-management/teacher-management
+
+📥 Install Dependencies
+
+npm install
+
+🚀 Run the Dev Server
+
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
