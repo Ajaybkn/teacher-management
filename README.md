@@ -44,3 +44,4 @@ npm install
 npm run dev
 
 Live Demo Link -  https://teacher-management-tracking.netlify.app/
+Loom Video Walkthrough Link - https://www.loom.com/share/1c028abfc68e4dafa368a7ee336a7ef3?sid=6cfc7777-7ab3-4c12-b6ea-aebb37c9704c
