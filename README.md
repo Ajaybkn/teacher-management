@@ -31,7 +31,8 @@ A modern and responsive teacher management platform built using [Next.js](https:
 ### 📦 Clone the Repo
 
 
-git clone https://github.com/yourusername/teacher-management.git
+git clone https://github.com/Ajaybkn/teacher-management.git
+
 cd teacher-management/teacher-management
 
 📥 Install Dependencies
