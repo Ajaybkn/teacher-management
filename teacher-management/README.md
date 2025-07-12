@@ -1,6 +1,6 @@
 # 🎓 Teacher Management Dashboard
 
-A modern and responsive teacher management platform built using [Next.js](https://nextjs.org), [Tailwind CSS](https://tailwindcss.com), [Recharts](https://recharts.org), and [DaisyUI](https://daisyui.com). This dashboard allows you to manage teachers, view reports, switch between dark and light themes, manage subscriptions, and more.
+A modern and responsive teacher management platform built using [Next.js](https://nextjs.org), [Tailwind CSS](https://tailwindcss.com), [Recharts](https://recharts.org) This dashboard allows you to manage teachers, view reports, switch between dark and light themes, manage subscriptions, and more.
 
 ---
 
