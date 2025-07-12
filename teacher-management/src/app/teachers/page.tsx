@@ -37,7 +37,8 @@ export default function TeachersListPage() {
 		<div className="p-6 max-w-7xl mx-auto relative min-h-screen pb-24">
 			<h2 className="text-2xl font-bold mb-6">All Teachers</h2>
 
-			<div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
+			<div className="flex flex-col md:flex-row justify-between items-stretch md:items-end gap-4 mb-6 w-full">
+				{/* Search Input */}
 				<div className="w-full md:w-1/2">
 					<input
 						type="text"
@@ -51,31 +52,42 @@ export default function TeachersListPage() {
 					/>
 					{search && (
 						<ul className="bg-white border rounded mt-1 shadow max-h-40 overflow-auto">
-							{filteredTeachers.slice(0, 5).map((t) => (
-								<li key={t.id} className="px-3 py-2 hover:bg-blue-100">
-									<Link href={`/teachers/${t.id}`}>{t.name}</Link>
-								</li>
-							))}
+							{filteredTeachers.length > 0 ? (
+								filteredTeachers.slice(0, 5).map((t) => (
+									<li key={t.id} className="px-3 py-2 hover:bg-blue-100">
+										<Link href={`/teachers/${t.id}`}>{t.name}</Link>
+									</li>
+								))
+							) : (
+								<span className="mx-auto flex items-center justify-center">No results found</span>
+							)}
 						</ul>
 					)}
 				</div>
 
-				<div className="flex flex-col md:flex-row items-center gap-4">
-					<div className="w-full md:w-auto">
-						<label className="mr-2 font-medium">Sort by:</label>
+				{/* Sort and Filter Controls */}
+				<div className="flex flex-col sm:flex-row gap-4 w-full md:w-1/2">
+					{/* Sort */}
+					<div className="w-full sm:w-1/2">
+						<label className="block text-sm font-medium mb-1">Sort by:</label>
 						<select
 							value={sort}
 							onChange={(e) => setSort(e.target.value)}
-							className="p-2 border rounded shadow-sm w-full md:w-auto"
+							className="w-full p-2 border rounded shadow-sm"
 						>
 							<option value="name">Name</option>
 							<option value="email">Email</option>
 						</select>
 					</div>
-					<div className="w-full md:w-auto">
-						<label className="mr-2 font-medium">Filter:</label>
-						<br />
-						<select value={filter} onChange={(e) => setFilter(e.target.value)} className="p-2 border rounded shadow-sm">
+
+					{/* Filter */}
+					<div className="w-full sm:w-1/2">
+						<label className="block text-sm font-medium mb-1">Filter:</label>
+						<select
+							value={filter}
+							onChange={(e) => setFilter(e.target.value)}
+							className="w-full p-2 border rounded shadow-sm"
+						>
 							<option value="all">All</option>
 							<option value="private">Private Qualified</option>
 							<option value="group">Group Qualified</option>
@@ -109,7 +121,7 @@ export default function TeachersListPage() {
 				))}
 			</div>
 
-			<div className="fixed bottom-0 left-0 right-0 bg-white py-4 flex justify-center sm:justify-evenly items-center space-x-2 z-10">
+			<div className="fixed bottom-0 left-0 right-0 bg-white py-4 flex justify-center sm:justify-center items-center space-x-2 z-10">
 				{Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
 					<button
 						key={page}
