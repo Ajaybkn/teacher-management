@@ -43,7 +43,7 @@ export default function Sidebar() {
 							<button
 								key={item.name}
 								onClick={() => router.push(item.href)}
-								className={`w-full text-left flex items-center px-4 py-2 rounded-lg text-sm font-medium transition ${
+								className={`w-full text-left flex items-center px-4 py-2 rounded-lg text-sm font-medium cursor-pointer  transition ${
 									isActive ? "bg-blue-600 text-white shadow" : "text-gray-700 hover:bg-blue-100"
 								}`}
 							>

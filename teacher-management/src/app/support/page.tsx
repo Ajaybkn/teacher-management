@@ -20,49 +20,76 @@ const faqList = [
 
 export default function Support() {
 	const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
+	const [errors, setErrors] = useState<{ [key: string]: string }>({});
 	const [submitted, setSubmitted] = useState(false);
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
 		setForm({ ...form, [e.target.name]: e.target.value });
+		if (errors[e.target.name]) {
+			setErrors({ ...errors, [e.target.name]: "" }); // clear error on change
+		}
+	};
+
+	const validate = () => {
+		const newErrors: { [key: string]: string } = {};
+
+		// Name should not contain numbers
+		if (!form.name.trim()) {
+			newErrors.name = "Name is required.";
+		} else if (/\d/.test(form.name)) {
+			newErrors.name = "Name cannot contain numbers.";
+		}
+
+		// Email format
+		if (!form.email.trim()) {
+			newErrors.email = "Email is required.";
+		} else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
+			newErrors.email = "Invalid email format.";
+		}
+
+		if (!form.subject.trim()) {
+			newErrors.subject = "Subject is required.";
+		}
+
+		if (!form.message.trim()) {
+			newErrors.message = "Message cannot be empty.";
+		}
+
+		setErrors(newErrors);
+		return Object.keys(newErrors).length === 0;
 	};
 
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
-		// Simulate sending the message
+		if (!validate()) return;
+
 		setSubmitted(true);
-		setTimeout(() => setSubmitted(false), 5000);
+		setForm({ name: "", email: "", subject: "", message: "" });
+		setTimeout(() => setSubmitted(false), 4000);
 	};
 
 	return (
 		<div className="max-w-6xl mx-auto px-4 py-10 space-y-12">
 			<h1 className="text-3xl font-bold text-gray-800">🛠️ Support Center</h1>
 
-			{/* Support Info Cards */}
+			{/* Info Cards */}
 			<div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-				<div className="bg-white p-5 border rounded-xl shadow flex items-start gap-4">
-					<Mail className="text-indigo-500 w-6 h-6" />
-					<div>
-						<h3 className="font-semibold text-gray-800">Email</h3>
-						<p className="text-gray-600 text-sm">support@teachermanage.com</p>
+				{[
+					{ icon: Mail, title: "Email", value: "support@teachermanage.com", color: "text-indigo-500" },
+					{ icon: Phone, title: "Phone", value: "+91 9993338765", color: "text-green-500" },
+					{ icon: Clock, title: "Working Hours", value: "Mon–Fri: 9 AM – 6 PM", color: "text-yellow-500" },
+				].map(({ icon: Icon, title, value, color }) => (
+					<div key={title} className="bg-white p-5 border rounded-xl shadow flex items-start gap-4">
+						<Icon className={`${color} w-6 h-6`} />
+						<div>
+							<h3 className="font-semibold text-gray-800">{title}</h3>
+							<p className="text-gray-600 text-sm">{value}</p>
+						</div>
 					</div>
-				</div>
-				<div className="bg-white p-5 border rounded-xl shadow flex items-start gap-4">
-					<Phone className="text-green-500 w-6 h-6" />
-					<div>
-						<h3 className="font-semibold text-gray-800">Phone</h3>
-						<p className="text-gray-600 text-sm">+91 9993338765</p>
-					</div>
-				</div>
-				<div className="bg-white p-5 border rounded-xl shadow flex items-start gap-4">
-					<Clock className="text-yellow-500 w-6 h-6" />
-					<div>
-						<h3 className="font-semibold text-gray-800">Working Hours</h3>
-						<p className="text-gray-600 text-sm">Mon–Fri: 9 AM – 6 PM</p>
-					</div>
-				</div>
+				))}
 			</div>
 
-			{/* FAQ */}
+			{/* FAQs */}
 			<div className="bg-white p-6 border rounded-xl shadow space-y-6">
 				<h2 className="text-xl font-semibold text-indigo-700">❓ Frequently Asked Questions</h2>
 				{faqList.map((faq, index) => (
@@ -76,46 +103,60 @@ export default function Support() {
 			{/* Contact Form */}
 			<div className="bg-white p-6 border rounded-xl shadow space-y-6">
 				<h2 className="text-xl font-semibold text-indigo-700">📬 Contact Support</h2>
+
 				{submitted && (
 					<div className="bg-green-100 text-green-700 p-3 rounded-lg text-sm">Message sent successfully!</div>
 				)}
+
 				<form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
-					<input
-						type="text"
-						name="name"
-						placeholder="Your Name"
-						required
-						className="border p-3 rounded-lg col-span-1"
-						value={form.name}
-						onChange={handleChange}
-					/>
-					<input
-						type="email"
-						name="email"
-						placeholder="Your Email"
-						required
-						className="border p-3 rounded-lg col-span-1"
-						value={form.email}
-						onChange={handleChange}
-					/>
-					<input
-						type="text"
-						name="subject"
-						placeholder="Subject"
-						required
-						className="border p-3 rounded-lg col-span-full"
-						value={form.subject}
-						onChange={handleChange}
-					/>
-					<textarea
-						name="message"
-						rows={5}
-						placeholder="Your Message"
-						required
-						className="border p-3 rounded-lg col-span-full"
-						value={form.message}
-						onChange={handleChange}
-					/>
+					<div className="col-span-1">
+						<input
+							type="text"
+							name="name"
+							placeholder="Your Name"
+							value={form.name}
+							onChange={handleChange}
+							className="border p-3 rounded-lg w-full"
+						/>
+						{errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
+					</div>
+
+					<div className="col-span-1">
+						<input
+							type="email"
+							name="email"
+							placeholder="Your Email"
+							value={form.email}
+							onChange={handleChange}
+							className="border p-3 rounded-lg w-full"
+						/>
+						{errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
+					</div>
+
+					<div className="col-span-full">
+						<input
+							type="text"
+							name="subject"
+							placeholder="Subject"
+							value={form.subject}
+							onChange={handleChange}
+							className="border p-3 rounded-lg w-full"
+						/>
+						{errors.subject && <p className="text-red-500 text-sm mt-1">{errors.subject}</p>}
+					</div>
+
+					<div className="col-span-full">
+						<textarea
+							name="message"
+							rows={5}
+							placeholder="Your Message"
+							value={form.message}
+							onChange={handleChange}
+							className="border p-3 rounded-lg w-full"
+						/>
+						{errors.message && <p className="text-red-500 text-sm mt-1">{errors.message}</p>}
+					</div>
+
 					<button
 						type="submit"
 						className="bg-indigo-600 text-white px-6 py-3 rounded-lg flex items-center gap-2 hover:bg-indigo-700 col-span-full justify-center"

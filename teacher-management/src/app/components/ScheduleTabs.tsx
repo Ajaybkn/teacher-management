@@ -180,12 +180,12 @@ export default function ScheduleTabs() {
 	return (
 		<div className="mt-8">
 			{/* Tab Buttons */}
-			<div className="border-b border-gray-200 flex gap-2 overflow-x-auto pb-2">
+			<div className="border-b border-gray-200 flex gap-2 overflow-x-auto    pb-2">
 				{tabs.map((tab) => (
 					<button
 						key={tab}
 						onClick={() => setActive(tab)}
-						className={`text-sm px-4 py-2 rounded-t transition font-medium whitespace-nowrap ${
+						className={`text-sm px-4 py-2 rounded-t cursor-pointer  transition font-medium whitespace-nowrap ${
 							active === tab
 								? "bg-white border border-b-0 border-blue-600 text-blue-600"
 								: "bg-gray-100 text-gray-600 hover:bg-gray-200"

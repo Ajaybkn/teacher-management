@@ -35,13 +35,13 @@ const Settings = () => {
 
 			{/* Toggle Columns */}
 			<div className="bg-white p-4 border rounded-lg shadow">
-				<h2 className="text-lg font-semibold text-gray-700 mb-4">🧩 Customize Columns</h2>
+				<h2 className="text-lg font-semibold text-gray-700  mb-4">🧩 Customize Columns</h2>
 				<div className="flex flex-wrap gap-4">
 					{Object.keys(visibleColumns).map((key) => (
 						<button
 							key={key}
 							onClick={() => toggleColumn(key as keyof typeof visibleColumns)}
-							className={`flex items-center gap-2 px-3 py-1.5 text-sm rounded-lg border ${
+							className={`flex  cursor-pointer  items-center gap-2 px-3 py-1.5 text-sm rounded-lg border ${
 								visibleColumns[key as keyof typeof visibleColumns]
 									? "bg-blue-100 border-blue-500 text-blue-700"
 									: "bg-gray-100 border-gray-400 text-gray-600"
@@ -59,7 +59,7 @@ const Settings = () => {
 				<h2 className="text-lg font-semibold text-gray-700 mb-4">📁 Data Export</h2>
 				<button
 					onClick={downloadJSON}
-					className="bg-indigo-600 text-white px-5 py-2 rounded-lg flex items-center gap-2 hover:bg-indigo-700"
+					className="bg-indigo-600    cursor-pointer   text-white px-5 py-2 rounded-lg flex items-center gap-2 hover:bg-indigo-700"
 				>
 					<Download className="w-5 h-5" />
 					Download All Teacher Data (JSON)
