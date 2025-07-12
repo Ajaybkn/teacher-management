@@ -43,3 +43,4 @@ npm install
 
 npm run dev
 
+Live Demo Link -  https://teacher-management-tracking.netlify.app/
