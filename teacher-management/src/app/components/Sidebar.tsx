@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { Menu, X, Home, Users, Settings, BookOpen, BarChart2, LifeBuoy } from "lucide-react";
+import { Menu, X, Home, Users, Settings, BookOpen, BarChart2, LifeBuoy, CreditCard } from "lucide-react";
 
 const navItems = [
 	{ name: "Dashboard", href: "/", icon: <Home className="w-5 h-5 mr-3" /> },
@@ -13,6 +13,7 @@ const navItems = [
 	{ name: "Reports", href: "/reports", icon: <BarChart2 className="w-5 h-5 mr-3" /> },
 
 	{ name: "Support", href: "/support", icon: <LifeBuoy className="w-5 h-5 mr-3" /> },
+	{ name: "Subscription", href: "/subscription", icon: <CreditCard className="w-5 h-5 mr-3" /> },
 	{ name: "Settings", href: "/settings", icon: <Settings className="w-5 h-5 mr-3" /> },
 ];
 
